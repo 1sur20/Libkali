@@ -2,6 +2,7 @@ KALI_LIB=libkali.a
 BUILD_DIR = build/
 INCLUDE_DIR = include/
 SOURCES_PATH=src/
+SHELL_TEMPLATE=shell_templates/shell.html
 
 DEMO_SOURCES=demo/
 DEMO_BUILD_DIR=$(BUILD_DIR)demo/
@@ -92,7 +93,7 @@ devtest: checkbuilddep remlibkali $(BUILD_DIR)$(JANSSON_LIB) $(BUILD_DIR)$(KALI_
 demo:
 	@echo --- Compiling sources and building $@
 	test -d $(DEMO_BUILD_DIR) || mkdir -p $(DEMO_BUILD_DIR)
-	$(CC) -o $(DEMO_BUILD_DIR)index.html -s $(SDL_LIB) -s $(SDL_IMAGE_LIB) -s $(SDL_IMAGE_FORMATS) -s ${SDL_MIXER_LIB} $(DEMO_SOURCES)*.c $(BUILD_DIR)$(KALI_LIB) $(BUILD_DIR)$(JANSSON_LIB) --embed-file $(DEMO_DATADIR) -I $(INCLUDE_DIR) -I $(JANSSON_INC_DIR)
+	$(CC) -o $(DEMO_BUILD_DIR)index.html --shell-file $(SHELL_TEMPLATE) -s $(SDL_LIB) -s $(SDL_IMAGE_LIB) -s $(SDL_IMAGE_FORMATS) -s ${SDL_MIXER_LIB} $(DEMO_SOURCES)*.c $(BUILD_DIR)$(KALI_LIB) $(BUILD_DIR)$(JANSSON_LIB) --embed-file $(DEMO_DATADIR) -I $(INCLUDE_DIR) -I $(JANSSON_INC_DIR)
 
 
 
