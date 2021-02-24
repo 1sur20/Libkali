@@ -1,0 +1,14 @@
+*.so
+*.[oa]
+*.al
+*.dll
+*.ba[kc]
+*.BACK
+*.back
+*.save
+*.SAVE
+*.bin
+*.rock
+*.rockspec
+.vscode
+.vs*

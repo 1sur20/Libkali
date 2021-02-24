@@ -1,0 +1,35 @@
+utf.lo: utf.c utf.h ../jansson_private_config.h \
+  /opt/emscripten-llvm/lib/clang/13.0.0/include/stddef.h \
+  /opt/emscripten-llvm/lib/clang/13.0.0/include/__stddef_max_align_t.h \
+  /opt/emscripten-llvm/lib/clang/13.0.0/include/stdint.h \
+  /home/neph/.emscripten_cache/sysroot/include/stdint.h \
+  /home/neph/.emscripten_cache/sysroot/include/bits/alltypes.h \
+  /home/neph/.emscripten_cache/sysroot/include/bits/stdint.h \
+  /home/neph/.emscripten_cache/sysroot/include/compat/string.h \
+  /home/neph/.emscripten_cache/sysroot/include/string.h \
+  /home/neph/.emscripten_cache/sysroot/include/features.h \
+  /home/neph/.emscripten_cache/sysroot/include/strings.h
+
+utf.h:
+
+../jansson_private_config.h:
+
+/opt/emscripten-llvm/lib/clang/13.0.0/include/stddef.h:
+
+/opt/emscripten-llvm/lib/clang/13.0.0/include/__stddef_max_align_t.h:
+
+/opt/emscripten-llvm/lib/clang/13.0.0/include/stdint.h:
+
+/home/neph/.emscripten_cache/sysroot/include/stdint.h:
+
+/home/neph/.emscripten_cache/sysroot/include/bits/alltypes.h:
+
+/home/neph/.emscripten_cache/sysroot/include/bits/stdint.h:
+
+/home/neph/.emscripten_cache/sysroot/include/compat/string.h:
+
+/home/neph/.emscripten_cache/sysroot/include/string.h:
+
+/home/neph/.emscripten_cache/sysroot/include/features.h:
+
+/home/neph/.emscripten_cache/sysroot/include/strings.h:

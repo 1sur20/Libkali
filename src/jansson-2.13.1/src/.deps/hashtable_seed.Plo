@@ -1,0 +1,91 @@
+hashtable_seed.lo: hashtable_seed.c ../jansson_private_config.h \
+  /home/neph/.emscripten_cache/sysroot/include/stdio.h \
+  /home/neph/.emscripten_cache/sysroot/include/wasi/api.h \
+  /opt/emscripten-llvm/lib/clang/13.0.0/include/stddef.h \
+  /opt/emscripten-llvm/lib/clang/13.0.0/include/__stddef_max_align_t.h \
+  /opt/emscripten-llvm/lib/clang/13.0.0/include/stdint.h \
+  /home/neph/.emscripten_cache/sysroot/include/stdint.h \
+  /home/neph/.emscripten_cache/sysroot/include/bits/alltypes.h \
+  /home/neph/.emscripten_cache/sysroot/include/bits/stdint.h \
+  /home/neph/.emscripten_cache/sysroot/include/features.h \
+  /home/neph/.emscripten_cache/sysroot/include/compat/time.h \
+  /home/neph/.emscripten_cache/sysroot/include/time.h \
+  /home/neph/.emscripten_cache/sysroot/include/fcntl.h \
+  /home/neph/.emscripten_cache/sysroot/include/bits/fcntl.h \
+  /home/neph/.emscripten_cache/sysroot/include/sched.h \
+  /home/neph/.emscripten_cache/sysroot/include/unistd.h \
+  /home/neph/.emscripten_cache/sysroot/include/bits/posix.h \
+  /home/neph/.emscripten_cache/sysroot/include/compat/sys/stat.h \
+  /home/neph/.emscripten_cache/sysroot/include/sys/stat.h \
+  /home/neph/.emscripten_cache/sysroot/include/bits/stat.h \
+  /home/neph/.emscripten_cache/sysroot/include/sys/time.h \
+  /home/neph/.emscripten_cache/sysroot/include/sys/select.h \
+  /home/neph/.emscripten_cache/sysroot/include/sys/types.h \
+  /home/neph/.emscripten_cache/sysroot/include/endian.h jansson.h \
+  /home/neph/.emscripten_cache/sysroot/include/compat/stdarg.h \
+  /opt/emscripten-llvm/lib/clang/13.0.0/include/stdarg.h \
+  /home/neph/.emscripten_cache/sysroot/include/compat/stdlib.h \
+  /home/neph/.emscripten_cache/sysroot/include/stdlib.h \
+  /home/neph/.emscripten_cache/sysroot/include/alloca.h jansson_config.h
+
+../jansson_private_config.h:
+
+/home/neph/.emscripten_cache/sysroot/include/stdio.h:
+
+/home/neph/.emscripten_cache/sysroot/include/wasi/api.h:
+
+/opt/emscripten-llvm/lib/clang/13.0.0/include/stddef.h:
+
+/opt/emscripten-llvm/lib/clang/13.0.0/include/__stddef_max_align_t.h:
+
+/opt/emscripten-llvm/lib/clang/13.0.0/include/stdint.h:
+
+/home/neph/.emscripten_cache/sysroot/include/stdint.h:
+
+/home/neph/.emscripten_cache/sysroot/include/bits/alltypes.h:
+
+/home/neph/.emscripten_cache/sysroot/include/bits/stdint.h:
+
+/home/neph/.emscripten_cache/sysroot/include/features.h:
+
+/home/neph/.emscripten_cache/sysroot/include/compat/time.h:
+
+/home/neph/.emscripten_cache/sysroot/include/time.h:
+
+/home/neph/.emscripten_cache/sysroot/include/fcntl.h:
+
+/home/neph/.emscripten_cache/sysroot/include/bits/fcntl.h:
+
+/home/neph/.emscripten_cache/sysroot/include/sched.h:
+
+/home/neph/.emscripten_cache/sysroot/include/unistd.h:
+
+/home/neph/.emscripten_cache/sysroot/include/bits/posix.h:
+
+/home/neph/.emscripten_cache/sysroot/include/compat/sys/stat.h:
+
+/home/neph/.emscripten_cache/sysroot/include/sys/stat.h:
+
+/home/neph/.emscripten_cache/sysroot/include/bits/stat.h:
+
+/home/neph/.emscripten_cache/sysroot/include/sys/time.h:
+
+/home/neph/.emscripten_cache/sysroot/include/sys/select.h:
+
+/home/neph/.emscripten_cache/sysroot/include/sys/types.h:
+
+/home/neph/.emscripten_cache/sysroot/include/endian.h:
+
+jansson.h:
+
+/home/neph/.emscripten_cache/sysroot/include/compat/stdarg.h:
+
+/opt/emscripten-llvm/lib/clang/13.0.0/include/stdarg.h:
+
+/home/neph/.emscripten_cache/sysroot/include/compat/stdlib.h:
+
+/home/neph/.emscripten_cache/sysroot/include/stdlib.h:
+
+/home/neph/.emscripten_cache/sysroot/include/alloca.h:
+
+jansson_config.h:
