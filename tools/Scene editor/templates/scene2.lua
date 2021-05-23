@@ -23,6 +23,7 @@ local scene = {
          active_hover = 1,
          active = 1
       },
+      --[[
       {
          --ghost 2
          sel_x = 0,
@@ -40,7 +41,7 @@ local scene = {
          h = 160,
          active_hover = 1,
          active = 1         
-      },
+      },]]
       {
          --fullscreen button
          sel_x = 320,
@@ -76,6 +77,24 @@ local scene = {
          h = 32,
          active_hover = 1,
          active = 1
+      },
+      {
+         --torch
+         sel_x = 0,
+         sel_y = 352,
+         sel_w = 32,
+         sel_h = 32,
+         start_frame = 0,
+         curr_frame = 0,
+         end_frame = 6,
+         loop_frame = 0,
+         frame_delay = 150,
+         x = 618,
+         y = 90,
+         w = 96,
+         h = 96,
+         active_hover = 0,
+         active = 1         
       }
    },
    hitboxes = {

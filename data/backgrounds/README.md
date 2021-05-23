@@ -1,0 +1,1 @@
+Backgrounds are under CC BY-NC-ND, so, unless you want to help us by hosting an unmodified version of this program or use them for a presentation of our project, you have to replace them to work with the library and publish the result.

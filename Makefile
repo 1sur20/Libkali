@@ -112,6 +112,8 @@ clean:
 	test -e  $(SOURCES_PATH)$(JANSSON_DIR)a.out.js && rm $(SOURCES_PATH)$(JANSSON_DIR)a.out.js || test 0
 	test -e  $(SOURCES_PATH)$(JANSSON_DIR)Makefile && rm $(SOURCES_PATH)$(JANSSON_DIR)Makefile || test 0
 	test -e  $(SOURCES_PATH)$(JANSSON_DIR)config.log && rm $(SOURCES_PATH)$(JANSSON_DIR)config.log || test 0
+	test -e  $(SOURCES_PATH)$(JANSSON_DIR)config.status && rm $(SOURCES_PATH)$(JANSSON_DIR)config.status || test 0
+	test -e  $(SOURCES_PATH)$(JANSSON_DIR)libtool && rm $(SOURCES_PATH)$(JANSSON_DIR)libtool || test 0
 
 
 

@@ -1,0 +1,1 @@
+Pixel Beats' songs are under an unknown license, but you can find his work on [YouTube](https://www.youtube.com/c/PixelBeats/) and visit his [Patreon page](https://www.patreon.com/pixelbeats) to support him.
