@@ -10,6 +10,10 @@
 
 
 
+/*
+	"Rotate" console queue: if we reach the end of circular buffer, replace lines at 
+	buffer's start with last buffer's entries and set current cursor pos at the new buffer's end.
+*/
 
 static void kal_interfaces_rotate_console_queue (struct kal_console_queue *q) {
 	int i, j;
@@ -36,11 +40,32 @@ static void kal_interfaces_rotate_console_queue (struct kal_console_queue *q) {
 
 
 
+static int kal_interfaces_check_utf8_validity (char *buffer) {
+	int length = 0;
+
+	if (*buffer == '\xc2' || *buffer == '\xc3') {
+		length = 2;
+	} else if (*buffer == '\xe2') {
+		length = 3;
+	} else if (*buffer == '\xf0' || *buffer == '\x9f') {
+		length = 4;
+	} else {
+		length = 1;
+	}
+
+	return length;
+}
 
 
+
+
+
+/*
+	Create console interface and return it.
+*/
 
 kal_console_text * kal_create_console_interface (kal_scene *scene, char *path) {
-	kal_console_text *kal_console = scene->text_console;
+	kal_console_text *kal_console = scene->text_console; // ??? useless ... non sens
 	SDL_Renderer *renderer = scene->display->renderer;
 
 
@@ -62,16 +87,24 @@ kal_console_text * kal_create_console_interface (kal_scene *scene, char *path) {
 
 
 
-
+/*
+	Function for adding a string to console interface.
+	Support ascii range and only some utf8 char for french and emot.
+*/
 
 void kal_interfaces_add_text_to_console_queue (kal_scene *scene, char *text) {
 	kal_console_queue *q = &scene->text_console->queue;
-	char *buffer; int i = 0;
+	char *buffer; int i = 0; 
+	int char_length; int char_left; int j = 0;
+	int emoj;
 
 	if (*text == '\x00')
 		return;
 
-	/* Verify queue isn't filled and add a new line/entry*/
+	/* 
+		Verify queue isn't filled and add a new line/entry in queue, 
+		increment q->curr_pos only if equal to q->curr_end (see kal_interfaces_rotate_queue function and interfaces.h)
+	*/
 	if (q->curr_end + 1 >= DISP_QUEUE_MAX) {
 		kal_interfaces_rotate_console_queue(q);
 	}
@@ -79,12 +112,36 @@ void kal_interfaces_add_text_to_console_queue (kal_scene *scene, char *text) {
 		q->curr_pos++;
 	q->curr_end++;
 
+	/*
+		Add a new line at curr_end pos.
+		Continue until we reach EOL (0x00) and add new lines if necessary (CR or no more space).
+
+		char_length is the bytes length of the current char (1 to 4)
+		
+		char_left is the same as char_length but is decremented for every copied byte (1 to 4), 
+		we increment j (*real* number of displayed char/sprites) when it reach 0
+		
+		i is the tot number of bytes
+		
+		emoj take value 2 if the current char is an emoticon : emot take two sprites (8x16),  
+	*/
+
+	char_length = 0;
+	char_left = 0;
 	for (buffer = text; *buffer != '\x00'; buffer++) {
+		/* Check char length (and utf8 validity/allowed chars) */
+		if (char_left <= 0) {
+			char_length = kal_interfaces_check_utf8_validity(buffer);
+			char_left = char_length;
+		}
+		(char_length >= 4) ? (emoj = 2) : (emoj = 1);
+
 		/* If there is no enought space in line, continue */
-		if (i >= TERM_MAX_COL || *buffer == '\n') {
+		if (j >= (TERM_MAX_COL / emoj) - 1 || *buffer == '\n') {
 			/* Add terminal null byte (replace newline) */
 			q->data[q->curr_end][i] = '\x00';
 			i = 0;
+			j = 0;
 			if (q->curr_end + 1 >= DISP_QUEUE_MAX)
 				kal_interfaces_rotate_console_queue(q);
 
@@ -95,10 +152,13 @@ void kal_interfaces_add_text_to_console_queue (kal_scene *scene, char *text) {
 				q->curr_end++;
 			}
 		}
+		char_left--;
 
 		/* Copy text in queue */
 		if (*buffer != '\n') {
 			q->data[q->curr_end][i] = *buffer;
+			if (char_left <= 0)
+				j++;
 			i++;
 		}
 	}
@@ -110,6 +170,10 @@ void kal_interfaces_add_text_to_console_queue (kal_scene *scene, char *text) {
 
 
 
+
+/*
+	Used for scrolling cursor pos from the console (up / down)
+*/
 
 void kal_interfaces_console_updown (kal_scene *scene, int mode) {
 	kal_console_queue *q = &scene->text_console->queue;

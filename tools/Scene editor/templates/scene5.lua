@@ -1,7 +1,7 @@
 local scene = {
-   name = "room-computer",
-   id = 3,
-   background = "data/backgrounds/background3.png",
+   name = "computer-display",
+   id = 5,
+   background = "data/backgrounds/background-computer.png",
    --charmap = "data/csprite.png",
    sprites_path = "data/sprites/spritesheet.png",
    sprites = {
@@ -64,25 +64,14 @@ local scene = {
          button = "left-click"
       },
       {
-         --to main room (scene 2)
+         --return to room-computer (scene 3)
          x = 0,
          y = 440,
          w = 960,
          h = 100,
          type = 1,
          action_name = "new-scene",
-         action_arg = "data/json/scene2.json",
-         button = "left-click"
-      },
-      {
-         --to computer screen (scene 5)
-         x = 189,
-         y = 294,
-         w = 180,
-         h = 114,
-         type = 1,
-         action_name = "new-scene",
-         action_arg = "data/json/scene5.json",
+         action_arg = "data/json/scene3.json",
          button = "left-click"
       }
    },
@@ -94,7 +83,7 @@ local scene = {
       sel_w = 16,
       sel_h = 16,
       cursor_events = {
-         --cursor to main room (scene 2)
+         --cursor to room-computer (scene 3)
          {
             sel_x = 48,
             sel_y = 64,
@@ -104,17 +93,6 @@ local scene = {
             y = 440,
             w = 960,
             h = 100,
-         },
-         --cursor for computer screen (scene 5)
-         {
-            sel_x = 32,
-            sel_y = 0,
-            sel_w = 16,
-            sel_h = 16,
-            x = 189,
-            y = 294,
-            w = 180,
-            h = 114,
          }
       }
    }

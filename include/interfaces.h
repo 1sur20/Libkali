@@ -34,7 +34,9 @@
 #endif
 
 
-
+/*
+   Valeur plus ou moins arbitraire, à revoir
+*/
 
 #define TERM_H_OFFSET 214
 #define TERM_V_OFFSET 108
@@ -52,20 +54,38 @@ typedef struct kal_scene kal_scene;
 
 
 
-
 #define kal_interfaces_console_up(scene) kal_interfaces_console_updown(scene, 0)
 #define kal_interfaces_console_down(scene) kal_interfaces_console_updown(scene, 1)
 
 
 
+/*
+   Structure représentant une queue/buffer circulaire de DISP_QUEUE_MAX (128) chaines de TERM_MAX_COL (66 chars)
+   multiplié par 4 pour l'encodage utf8 sur 4 bytes.
+
+   -data : tableau de pointeur sur les entrées (chaines) de la queue
+   -curr_end : index de la dernière entrée du tableau (dernière chaine ajoutée)
+   -curr_pos : index de l'entrée affichée actuellement (position du scrolling)
+*/
 
 typedef struct kal_console_queue {
-   char data[DISP_QUEUE_MAX][TERM_MAX_COL + 1];
+   char data[DISP_QUEUE_MAX][TERM_MAX_COL * 4];
    int curr_end;
    int curr_pos;
 } kal_console_queue;
 
 
+/*
+   Structure représentant une "console" (terminal).
+   
+   -queue : struct kal_console_queue contenant les données à afficher sur la console
+   -charmap : SDL_Texture des sprites utilisés pour l'affichage des lettres
+   -width : largeur de la console
+   -height : hauteur de la console
+   -x : position de la console
+   -y : position de la console
+   -active: actuellement affiché si 1, sinon 0
+*/
 
 typedef struct kal_console_text {
    struct kal_console_queue queue;
@@ -93,11 +113,23 @@ typedef struct kal_speech_bubble {
 
 
 
-
+/*
+   Créer un nouvel objet de type kal_console_text représentant une console (terminal).
+*/
 
 kal_console_text * kal_create_console_interface (kal_scene * scene, char * charmap);
 
+
+/*
+   Ajoute une ligne à la console
+*/
+
 void kal_interfaces_add_text_to_console_queue (kal_scene * scene, char * text);
+
+
+/*
+   Scrolling de la console (change la position actuelle à afficher)
+*/
 
 void kal_interfaces_console_updown(kal_scene * scene, int mode);
 

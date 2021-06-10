@@ -516,13 +516,13 @@ static void kal_display_verify_cursor_hitbox (kal_scene *scene) {
 
 		if ((mouse_x >= r.x && mouse_x <= r.x + r.w \
 	 	&& mouse_y >= r.y && mouse_y <= r.y + r.h)) {
-			 scene->cursor.cursor_select.x = scene->cursor.events[i].src_rect.x;
-			 scene->cursor.cursor_select.y = scene->cursor.events[i].src_rect.y;
-			 scene->cursor.cursor_select.w = scene->cursor.events[i].src_rect.w;
-			 scene->cursor.cursor_select.h = scene->cursor.events[i].src_rect.h;
+			scene->cursor.cursor_select.x = scene->cursor.events[i].src_rect.x;
+			scene->cursor.cursor_select.y = scene->cursor.events[i].src_rect.y;
+			scene->cursor.cursor_select.w = scene->cursor.events[i].src_rect.w;
+			scene->cursor.cursor_select.h = scene->cursor.events[i].src_rect.h;
 
-			 return;
-		 }
+			return;
+		}
 	}
 
 	// No events was found, so set current cursor pos to default
@@ -619,6 +619,7 @@ void kal_display_render_console_text(kal_scene *scene, int x, int y, int w, int 
 	SDL_Rect rect;
 	int line_offset;
 	int i, j, k, l;
+	int old_val;
 
 	kal_aspect_ratio r = {'\x00'};
 
@@ -680,53 +681,146 @@ void kal_display_render_console_text(kal_scene *scene, int x, int y, int w, int 
 				src_rect.y = 3 * 16;
 				src_rect.x = (q->data[i][k] - 0x20) * 8;
 				SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
-			} else if (q->data[i][k] == '\xc2' || q->data[i][k] == '\xc3' || q->data[i][k] == '\xe2') {
+			} else if (q->data[i][k] > '\x5a' && q->data[i][k] < '\x61') {
+				//SPRITE LINE 5
+				src_rect.y = 4 * 16;
+				src_rect.x = (q->data[i][k] - 0x5b) * 8;
+				SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+			} else if (q->data[i][k] > '\x7a' && q->data[i][k] < '\x7f') {
 				//SPRITE LINE 6
 				src_rect.y = 5 * 16;
+				src_rect.x = (q->data[i][k] - 0x7b) * 8;
+				SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+			} else if (q->data[i][k] == '\xc2' || q->data[i][k] == '\xc3') {
+				//SPRITE LINE 7
+				src_rect.y = 6 * 16;
 				switch(q->data[i][k + 1]) {
-					case '\xa8':
-						src_rect.x = 1 * 8;
-						k++;
-						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
-						break;
-					case '\xa9':
+					case '\xb5':
 						src_rect.x = 0 * 8;
 						k++;
 						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
 						break;
-					case '\xaa':
+					case '\xa0':
+						src_rect.x = 1 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\xa2':
 						src_rect.x = 2 * 8;
 						k++;
 						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
 						break;
-					case '\xab':
+					case '\xa4':
 						src_rect.x = 3 * 8;
 						k++;
 						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
 						break;
-					case '\xb4':
+					case '\xa7':
 						src_rect.x = 4 * 8;
 						k++;
 						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
 						break;
-					case '\xb5':
-						src_rect.x = 6 * 8;
-						k++;
-						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
-						break;
-					case '\xb6':
+					case '\xa8':
 						src_rect.x = 5 * 8;
 						k++;
 						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
 						break;
-					case '\x82':
-						if (q->data[i][k + 2] == '\xac') {
-							src_rect.x = 7 * 8;
-							k += 2;
-							SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
-						}
+					case '\xa9':
+						src_rect.x = 6 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\xaa':
+						src_rect.x = 7 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\xab':
+						src_rect.x = 8 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\xae':
+						src_rect.x = 9 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);			
+						break;
+					case '\xaf':
+						src_rect.x = 10 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\xb4':
+						src_rect.x = 11 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\xb6':
+						src_rect.x = 12 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\xb9':
+						src_rect.x = 13 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\xbb':
+						src_rect.x = 14 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\xbc':
+						src_rect.x = 15 * 8;
+						k++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
 						break;
 				}
+			} else if (q->data[i][k] == '\xe2') {
+				//SPRITE LINE 8
+				src_rect.y = 7 * 16;
+				switch(q->data[i][k+1]) {
+					case '\x82':
+						if (q->data[i][k+2] == '\xac') {
+							src_rect.x = 0 * 8;
+							k += 2;
+							SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						};
+						break;
+				}
+			} else if (q->data[i][k] == '\xf0' && q->data[i][k+1] == '\x9f'\
+			  && (q->data[i][k+2] >= '\x98' && q->data[i][k+2] <= '\x99')) {
+				//SPRITE LINE 9
+				src_rect.y = 8 * 16;
+				switch(q->data[i][k+3]) {
+					case '\x84':
+						//Really dirty hack ... 'cause my own software suck
+						//Since emoj (utf-8) will be displayed in two collumns (16x8) and char aren't (8*8)
+						//we need to multiply display witdth by two and increment l (the current length of the 'displayed' string) 
+						//accordingly. Then, reset width value and pray god (Kali) that your device 
+						//doesn't display something weird.
+						src_rect.x = 0 * 8;
+						src_rect.w = 16;
+						old_val = rect.w;
+						rect.w = 2*rect.w;
+						k += 3;
+						l++;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						src_rect.w = 8;
+						rect.w = old_val;
+						break;
+					case '\x82':
+						src_rect.x = 2 * 8;
+						k += 3;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+					case '\x90':
+						src_rect.x = 4 * 8;
+						k += 3;
+						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						break;
+				}
+
 			}
 			l++;
 		}
@@ -768,9 +862,23 @@ void kal_display_set_curr_cursor (kal_scene *scene) {
 
 	tmp_rect.x = 0;
 	tmp_rect.y = 0;
-	tmp_rect.w = 16*3;
-	tmp_rect.h = 16*3;
+	tmp_rect.w = 16*2;
+	tmp_rect.h = 16*2;
 	kal_display_scale_aspect_ratio(&scene->display->infos, &tmp_rect);
+
+
+	/* Correction for cursor size in browser (sucks), 
+		see https://groups.google.com/a/chromium.org/g/blink-dev/c/e0bzxOfL-2I/m/_G0ohB29DAAJ 
+	*/
+
+	if (tmp_rect.w > 32 || tmp_rect.h > 32) {
+		tmp_rect.w = 32;
+		tmp_rect.h = 32;
+	} else if (tmp_rect.w < 8 || tmp_rect.h < 8) {
+		tmp_rect.w = 8;
+		tmp_rect.h = 8;
+	}
+
 	dst_rect.x = tmp_rect.x;
 	dst_rect.y = tmp_rect.y;
 	dst_rect.w = tmp_rect.w;

@@ -1,6 +1,6 @@
 local scene = {
    name = "room-bed",
-   id = 2,
+   id = 4,
    background = "data/backgrounds/background5.png",
    --charmap = "data/csprite.png",
    sprites_path = "data/sprites/spritesheet.png",
