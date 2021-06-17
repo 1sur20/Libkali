@@ -59,6 +59,34 @@ static int kal_interfaces_check_utf8_validity (char *buffer) {
 
 
 
+static int kal_interfaces_console_check_space_for_left_align (char *buffer, int curr_str_length) {
+	int curr_word_length = 0;
+	int i; int char_left; int char_length; int emoj;
+
+	char_length = 0;
+	char_left = 0;
+	for (i = 1; *(buffer + i) != '\x20' && *(buffer + i) != '\x00' && *(buffer + i) != '\n'; i++) {
+		if (char_left <= 0) {
+			char_length = kal_interfaces_check_utf8_validity(buffer + i);
+			char_left = char_length;
+		}
+		(char_length >= 4) ? (emoj = 2) : (emoj = 1);
+		
+		char_left--;
+		if (char_left <= 0)
+			curr_word_length += emoj;
+	}
+
+	return (curr_word_length >= (TERM_MAX_COL - 1) - curr_str_length && curr_word_length <= TERM_MAX_COL - 1);
+}
+
+
+
+
+
+
+
+
 
 /*
 	Create console interface and return it.
@@ -94,8 +122,9 @@ kal_console_text * kal_create_console_interface (kal_scene *scene, char *path) {
 
 void kal_interfaces_add_text_to_console_queue (kal_scene *scene, char *text) {
 	kal_console_queue *q = &scene->text_console->queue;
-	char *buffer; int i = 0; 
-	int char_length; int char_left; int j = 0;
+	int go_to_newline = 0; int j = 0; int i = 0;
+	int char_length; int char_left;
+	char *buffer;
 	int emoj;
 
 	if (*text == '\x00')
@@ -137,7 +166,8 @@ void kal_interfaces_add_text_to_console_queue (kal_scene *scene, char *text) {
 		(char_length >= 4) ? (emoj = 2) : (emoj = 1);
 
 		/* If there is no enought space in line, continue */
-		if (j >= (TERM_MAX_COL / emoj) - 1 || *buffer == '\n') {
+		if (j >= TERM_MAX_COL - 1 || *buffer == '\n' || go_to_newline) {
+			go_to_newline = 0;
 			/* Add terminal null byte (replace newline) */
 			q->data[q->curr_end][i] = '\x00';
 			i = 0;
@@ -154,11 +184,14 @@ void kal_interfaces_add_text_to_console_queue (kal_scene *scene, char *text) {
 		}
 		char_left--;
 
+		if (q->left_align && *buffer == '\x20')
+			go_to_newline = kal_interfaces_console_check_space_for_left_align(buffer, j);
+
 		/* Copy text in queue */
 		if (*buffer != '\n') {
 			q->data[q->curr_end][i] = *buffer;
 			if (char_left <= 0)
-				j++;
+				j += emoj;
 			i++;
 		}
 	}

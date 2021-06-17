@@ -136,6 +136,7 @@ local scene = {
       }
    },
    flags = CONSOLE_FLAG,
+   console_attr = LEFT_ALIGN,
    cursor = {
       sprites_path = "data/sprites/cursor.png",
       sel_x = 0, --default cursor select

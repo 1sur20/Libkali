@@ -72,6 +72,7 @@ typedef struct kal_console_queue {
    char data[DISP_QUEUE_MAX][TERM_MAX_COL * 4];
    int curr_end;
    int curr_pos;
+   int left_align;
 } kal_console_queue;
 
 

@@ -18,6 +18,7 @@ NOFLAG = 0
 CONSOLE_FLAG = 1
 BUBBLE_FLAG = 2
 
+LEFT_ALIGN = 1
 
 
 --[[ Display help ]]

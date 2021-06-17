@@ -115,13 +115,14 @@ static void kal_scene_parse_default_scene_description (kal_scene *scene, json_t 
 */
 
 static void kal_scene_parse_scene_charmap (kal_scene *scene, json_t *root) {
-	json_t *charmap, *flags;
+	json_t *charmap, *flags, *console_attr;
 
 
 	// Optional, charmap imply flag and, reciprocaly, flag imply charmap 
 
    charmap = json_object_get(root, "charmap");
 	flags = json_object_get(root, "flags");
+	console_attr = json_object_get(root, "console_attr");
 	if (charmap && flags) {
 		if (!json_is_string(charmap) || !json_is_integer(flags)) {
       	json_decref(root);
@@ -133,6 +134,8 @@ static void kal_scene_parse_scene_charmap (kal_scene *scene, json_t *root) {
 				scene->text_console = kal_create_console_interface(scene, (char *)json_string_value(charmap));
 				scene->speech_bubble = NULL;
 				scene->text_console->active = 1;
+				if (console_attr && json_is_integer(console_attr))
+					scene->text_console->queue.left_align = json_integer_value(console_attr);
 				break;
 			case KAL_BUBBLE:
 				scene->speech_bubble = NULL;
@@ -142,6 +145,8 @@ static void kal_scene_parse_scene_charmap (kal_scene *scene, json_t *root) {
 				scene->text_console = kal_create_console_interface(scene, (char *)json_string_value(charmap));
 				scene->speech_bubble = NULL;
 				scene->text_console->active = 1;
+				if (console_attr && json_is_integer(console_attr))
+					scene->text_console->queue.left_align = json_integer_value(console_attr);
 				break;
 		}
 	}
