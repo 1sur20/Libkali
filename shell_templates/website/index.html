@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-us">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=0.4">
+      <title>Le Monde de Mao</title>
+
+      <link rel="stylesheet" href="css/kal.css">
+      <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+   </head>
+   <body>
+
+      <!-- Back to top button -->
+      <a id="top-button"></a>
+
+      <div class="game-title-div">
+         <img src="img/kali-web-logo.png" id="kal_logo" alt="Logo du site 'Le monde de Mao'" style="width:100%">
+         <br>
+         <h3 id="game_title">Mahaut-Lou Merly (Kalimba)</h3>
+         <h3 id="game_title">14.01.1998 - 29.07.2020</h3>
+      </div>
+
+
+      <div class="big-square">
+      </div>
+
+
+      <div class="container">
+         <iframe id="game_frame" frameborder="0" scrolling="no" allowfullscreen></iframe>
+         <img src="img/kali-port-web.png" id="kal_port" alt="Portait de Mahaut-Lou" style="width:100%">
+         <button class="btn" id="start_btn" onClick="start_game()"><i class="fa fa-play-circle"></i> Run Game</button>
+      </div>
+      <div class="col-1">
+         <div id="col_square"></div> 
+         <br>
+         <h3 id="discl">Disclaimer:</h5>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat est elit, sed blandit metus euismod sed. Maecenas quis odio nec ante ullamcorper auctor non nec nisl. Aenean nisi turpis, lacinia id ullamcorper sed, mollis id ex. Cras mattis efficitur dui nec ultricies. Phasellus a nulla ut justo sagittis condimentum sit amet at justo. Etiam a eros mollis, mattis erat sit amet, ornare tellus. Morbi pretium, elit in laoreet laoreet, justo metus pharetra ante, in faucibus nunc mi cursus risus. Aenean bibendum, odio vitae efficitur malesuada, metus ex egestas nunc, nec malesuada lacus magna vitae massa. Mauris vitae sagittis est. Cras vitae convallis lorem, at varius risus. Suspendisse viverra nec justo eu commodo. Sed rhoncus ipsum purus, facilisis venenatis augue imperdiet at. Pellentesque posuere, arcu cursus pulvinar feugiat, neque nunc convallis erat, at pellentesque augue sem a arcu. Quisque imperdiet sed nunc eu elementum. Ut euismod, odio vitae dictum feugiat, nisi metus elementum eros, fermentum consectetur augue lacus ut tortor.</p>
+         <p>Donec molestie, nulla sit amet vestibulum ornare, quam ex pretium ligula, quis fermentum mi purus et magna. Nam ornare varius aliquam. Nullam feugiat porttitor ex id volutpat. Aliquam vitae leo mattis, aliquam diam non, auctor augue. Mauris lacinia et lectus ac eleifend. Quisque vulputate, lectus et tincidunt tristique, ante mauris tristique ex, non tincidunt nunc ipsum sit amet enim. Donec egestas lobortis ante, in hendrerit dui.</p>
+      </div>
+
+      <footer class="footer-div">
+         <p class="pfooter">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a><br />Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Licence Creative Commons Attribution - Pas d&#39;Utilisation Commerciale - Pas de Modification 4.0 International</a>.
+            <br>
+            Le code source du moteur de jeu est sous licence libre (WTFPL), voir <a target="_blank" href="https://github.com/1sur20/Libkali#4---credits">la page du projet</a> pour plus d'informations.
+            <br>
+            Made with  <i class="fa fa-heart" aria-hidden="true"></i>  by <a target="_blank" href="https://github.com/1sur20">1/20</a> / Contact: <a href="mailto:1sur20@crypt.lol">1sur20@crypt.lol</a>
+         </p>
+      </footer>
+ 
+
+
+      <script>
+         function start_game () {
+            document.getElementById("game_frame").src="game/index.html";
+            document.getElementById("start_btn").hidden=1;
+            document.getElementById("kal_port").hidden=1;
+            document.getElementById("game_frame").focus();
+         }
+
+         var btn = document.querySelector("#top-button");
+
+         window.addEventListener("scroll", (e) => {
+            if (window.scrollY > 300) {
+               btn.classList.add("show");
+            } else {
+               btn.classList.remove("show");
+            }
+         });
+
+         btn.addEventListener("click", (e) => { 
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+         });
+      </script>
+   </body>
+</html>

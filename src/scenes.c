@@ -418,7 +418,7 @@ static void kal_scene_parse_scene_cursor_data (kal_scene *scene, json_t *root) {
 		kal_scene_parse_cursor_ev_array(scene, root, cursor_ev_array);
 	} else {
 		scene->cursor.tot_events = 0;
-		json_decref(root);
+		//json_decref(root); // double free !
 		return;
 	}
 
@@ -442,7 +442,7 @@ static void kal_scene_parse_json_string (kal_scene *scene, char *json_str) {
    
 	root = json_loads(json_str, 0, &error);
    if (!root)
-      kal_error_exit(error.text);
+		kal_error_exit(error.text);
 
    if (!json_is_object(root)) {
       json_decref(root);

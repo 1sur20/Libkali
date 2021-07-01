@@ -93,14 +93,15 @@ static int kal_interfaces_console_check_space_for_left_align (char *buffer, int 
 */
 
 kal_console_text * kal_create_console_interface (kal_scene *scene, char *path) {
-	kal_console_text *kal_console = scene->text_console; // ??? useless ... non sens
+	kal_console_text *kal_console;
 	SDL_Renderer *renderer = scene->display->renderer;
 
 
 	kal_console = (struct kal_console_text *)malloc(sizeof(struct kal_console_text));
 	if (!kal_console)
 		kal_error_exit(strerror(errno));
-	memset(&kal_console->queue, 0, sizeof(struct kal_console_text));
+	//memset(&kal_console->queue, 0, sizeof(struct kal_console_queue));
+	memset(kal_console, 0, sizeof(struct kal_console_text));
 
 	//why ? 
 	kal_console->queue.curr_end = -1;
@@ -166,7 +167,7 @@ void kal_interfaces_add_text_to_console_queue (kal_scene *scene, char *text) {
 		(char_length >= 4) ? (emoj = 2) : (emoj = 1);
 
 		/* If there is no enought space in line, continue */
-		if (j >= TERM_MAX_COL - 1 || *buffer == '\n' || go_to_newline) {
+		if (j >= TERM_MAX_COL - 1 || *buffer == '\n' || go_to_newline || i >= (TERM_MAX_COL*4)) {
 			go_to_newline = 0;
 			/* Add terminal null byte (replace newline) */
 			q->data[q->curr_end][i] = '\x00';

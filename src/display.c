@@ -657,7 +657,7 @@ void kal_display_render_console_text(kal_scene *scene, int x, int y, int w, int 
 		rect.y = r.y + (j * rect.h);
 
 		l = 0;
-		for (k = 0; q->data[i][k] != '\x00'; k++) {
+		for (k = 0; q->data[i][k] != '\x00' && k < (TERM_MAX_COL*4) && l < TERM_MAX_COL; k++) {
 
 			rect.x = r.x + (l * rect.w);
 
@@ -811,13 +811,25 @@ void kal_display_render_console_text(kal_scene *scene, int x, int y, int w, int 
 						break;
 					case '\x82':
 						src_rect.x = 2 * 8;
+						src_rect.w = 16;
+						old_val = rect.w;
+						rect.w = 2*rect.w;
 						k += 3;
+						l++;
 						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						src_rect.w = 8;
+						rect.w = old_val;
 						break;
 					case '\x90':
 						src_rect.x = 4 * 8;
+						src_rect.w = 16;
+						old_val = rect.w;
+						rect.w = 2*rect.w;
 						k += 3;
+						l++;
 						SDL_RenderCopy(renderer, kal_console->charmap, &src_rect, &rect);
+						src_rect.w = 8;
+						rect.w = old_val;
 						break;
 				}
 

@@ -27,14 +27,14 @@ Le framework servira de base pour un hommage à une amie qui nous a quittée le 
 
 ### 3 - Utilisation
 
-Copier les fichiers du répertoire _data/build/_ (index.*) à la racine d'un serveur web. Et .. c'est tout.
+Copier les fichiers du répertoire _build/demo/public/_ à la racine d'un serveur web. Et .. c'est tout.
   
 
 ### 4 - Helping
 
 
 
-### 5 - Credits
+### 5 - Credits / licenses
 
 The code source of this project is under **WTFPL**. So, just do what the fuck you want with it. **BUT**, this repository also **include libraries, sprites and sounds from third parties which are under different licenses** :
 
@@ -44,8 +44,16 @@ The code source of this project is under **WTFPL**. So, just do what the fuck yo
 * Music from [Pixel Beats](https://www.patreon.com/pixelbeats) (Unknown licence)
 * Cursor sprites from [Kicked-in-Teeth](https://kicked-in-teeth.itch.io/point) (CC BY-SA)
 * Unused ghost sprites are from [Warren Clark](https://lionheart963.itch.io/) (Unknown licence)
-* Files in the directory data/backgrounds/ are under CC BY-NC-ND, so, unless you want to help us by hosting an unmodified version of this program, you have to replace them to work with the library and publish the result. 
-* All other sprites are from us (including those st.. inspired by [Stardew Valley](https://www.stardewvalley.net/)) and are under WTFPL.
+* Police used are [8 bit arcade by Damien Gosset](https://www.dafont.com/fr/8-bit-arcade.font), [font awesome](https://fontawesome.com/v4.7/license/), [dogica by Roberto Mocci](https://www.dafont.com/fr/dogica.font)
 
-Look at the LICENSE and README files under each directory.
+The game (demo) "Le monde de Mao" in this repository is under CC BY-NC-ND, so unless you want to help us by hosting an unmodified version of "Le monde de Mao", you can't use its files and/or ditribute them alone. More precisely: 
+* All pictures of Mahaut-lou can not be distributed alone.
+* Files in the directory data/backgrounds/ can not be distributed alone.
+* Files in the directory shell_templates/website/ can not be distributed alone
+* You can't publish a modified version of "Le monde de Mao"
+
+
+All other sprites are from us (including those st.. inspired by [Stardew Valley](https://www.stardewvalley.net/)) and are under CC BY-SA. You can find them on itch.io (soon).
+
+Look at the LICENSE and README files under each directory or ask if you don't know: [1sur20@crypt.lol](mailto:1sur20@crypt.lol).
 

@@ -69,7 +69,7 @@ typedef struct kal_scene kal_scene;
 */
 
 typedef struct kal_console_queue {
-   char data[DISP_QUEUE_MAX][TERM_MAX_COL * 4];
+   char data[DISP_QUEUE_MAX][TERM_MAX_COL * 8];
    int curr_end;
    int curr_pos;
    int left_align;
